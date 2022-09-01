@@ -1,20 +1,46 @@
 import os
 import sys
 import os.path
-import re
-
-args = sys.argv[1]
 
 
-d = re.search(r'\d{4}-\d{2}-\d{2}', args)
-if d is None:
-	print("-----")
+srclist = ["300223-北京君正","002185-华天科技","600460-士兰微","600745-闻泰科技","600584-长电科技"
+				,"600048-保利发展","002271-东方雨虹","000002-万科A","600499-科达制造"
+				,"002129-TCL中环","603260-合盛硅业","601012-隆基绿能","600438-通威股份"
+				,"002761-浙江建投","600893-航发动力","600862-中航高科","600760-中航沈飞"
+				,"002460-赣锋锂业","002240-盛新锂能","002466-天齐锂业","603390-今世缘","600702-舍得酒业"
+				,"000858-王粮液","600111-北方稀土","600549-厦门乌业","000831-五矿稀土","002594-比亚迪"
+				,"000338-潍柴动力","000625-长安汽车","000951-中国重汽","601865-福莱特","603806-福斯特"
+				,"002202-金风科技","601615-明阳智能","002218-拓日新能","600089-特变电工","300274-阳光电源"
+				,"600332-白云山","601607-上海医药","600056-中国医药","000636-风华高科","002241-歌尔股份"
+				,"300433-蓝思科技","002475-立讯精密","002920-德赛西威"]
+
+absp = os.path.abspath(".")
+postfix = ".png"
+
+
+files = os.listdir()
+print(len(files),len(srclist))
+if files is not None and len(files) != len(srclist):
+	print("文件长度不一致.",end="\n")
 	exit()
 
-for dirpath, dirnames, filenames in os.walk(".\\板块"):
+for fn in files:
+	if not fn.endswith(".png"):
+		print(fn,"格式不对",sep=" ",end="\n")
+		exit()
 
-	for filename in filenames:
-		if re.search(r'\d{4}-\d{2}-\d{2}',filename) is None:
-			print(os.path.join(dirpath,filename) )
-			os.rename(os.path.join(dirpath,filename) ,os.path.join(dirpath,d.group(0)+".png") )
+
+
+for index,fn in enumerate(files):
+    t = srclist[index].split("-")[0]+".png"
+    print(fn,t,sep="->",end="\n")
+    if fn == t:
+    	print("文件名一样",fn,sep="  ",end="\n")
+    	exit()
+    os.rename(os.path.join(absp,fn) ,os.path.join(absp,t) )
+
+
+print("------成功-------------------")
+
+
 
