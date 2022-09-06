@@ -13,7 +13,7 @@ SECRET_KEY = 'u8vgOVqsPXK9cToNpSyQNBU0dcNtnRYK'
 
 client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
 
-image = get_file_content('C:\\Users\\Administrator\\Desktop\\2022-08-12.png')
+image = get_file_content('C:\\Users\\Administrator\\Documents\\BaiduNetdiskWorkspace\\20220830\\1661867160055.png')
 
 options = {}
 # options["language_type"] = "CHN_ENG"
